@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Euromonitor International — Events Calendar FY 26/27</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pumpkin: #FF6A13;
+    --ming: #34657F;
+    --white: #FFFFFF;
+    --mine-shaft: #3E3E3E;
+    --ming-light: rgba(52,101,127,0.08);
+    --ming-mid: rgba(52,101,127,0.18);
+    --pumpkin-light: rgba(255,106,19,0.10);
+    --surface: #F7F8FA;
+    --border: #E2E8EE;
+    --text-muted: #7B8FA0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--mine-shaft);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ming);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(52,101,127,0.25);
+  }
+  .site-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--pumpkin);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .brand-text {
+    font-family: 'DM Serif Display', serif;
+    color: white;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+  }
+  .brand-text span {
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    display: block;
+    margin-top: -2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .header-badge {
+    background: var(--pumpkin);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── HERO STRIP ── */
+  .hero {
+    background: linear-gradient(135deg, var(--ming) 0%, #1e4d65 100%);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(255,106,19,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 30%;
+    bottom: -80px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; position: relative; }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pumpkin);
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.92rem;
+    max-width: 560px;
+    line-height: 1.65;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--pumpkin);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── OFFICE TABS ── */
+  .tabs-wrapper {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tabs {
+    display: flex;
+    padding: 0 2rem;
+    gap: 0;
+    white-space: nowrap;
+  }
+  .tab-btn {
+    padding: 16px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.18s ease;
+    letter-spacing: 0.02em;
+  }
+  .tab-btn:hover { color: var(--ming); }
+  .tab-btn.active {
+    color: var(--pumpkin);
+    border-bottom-color: var(--pumpkin);
+    font-weight: 600;
+  }
+  .tab-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-right: 7px;
+    opacity: 0.6;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main { padding: 2.5rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+  .office-panel { display: none; }
+  .office-panel.active { display: block; }
+
+  /* Quarter group */
+  .quarter-group { margin-bottom: 3rem; }
+  .quarter-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ming-mid);
+  }
+  .quarter-pill {
+    background: var(--ming);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .quarter-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--ming);
+  }
+  .quarter-count {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Event cards grid */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .event-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 10px 0 0 10px;
+  }
+  .event-card.type-hosted::before { background: var(--pumpkin); }
+  .event-card.type-external::before { background: var(--ming); }
+  .event-card.type-webinar::before { background: #7B8FA0; }
+  .event-card.type-first-look::before { background: #2E8B57; }
+  .event-card:hover {
+    box-shadow: 0 4px 20px rgba(52,101,127,0.12);
+    transform: translateY(-2px);
+  }
+
+  .event-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .event-name {
+    font-weight: 600;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    color: var(--mine-shaft);
+    flex: 1;
+  }
+  .event-badge {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .badge-hosted { background: var(--pumpkin-light); color: var(--pumpkin); }
+  .badge-external { background: var(--ming-light); color: var(--ming); }
+  .badge-webinar { background: #f0f2f5; color: #7B8FA0; }
+  .badge-first-look { background: rgba(46,139,87,0.10); color: #2E8B57; }
+
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .meta-icon {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  .meta-date { font-weight: 600; color: var(--mine-shaft); }
+
+  .event-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+  .poc-chip {
+    background: var(--ming-light);
+    color: var(--ming);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .event-link {
+    font-size: 0.7rem;
+    color: var(--pumpkin);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .event-link:hover { text-decoration: underline; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding: 14px 18px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .empty-state .icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.4; }
+  .empty-state p { font-size: 0.88rem; }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: white;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--pumpkin);
+    color: var(--pumpkin);
+    background: var(--pumpkin-light);
+  }
+  .filter-search {
+    margin-left: auto;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: white;
+    color: var(--mine-shaft);
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    width: 200px;
+    transition: border-color 0.15s;
+  }
+  .filter-search:focus { border-color: var(--ming); }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--mine-shaft);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    margin-top: 4rem;
+  }
+  .site-footer strong { color: rgba(255,255,255,0.7); }
+
+  /* Hosting note box */
+  .hosting-note {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--pumpkin);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.82rem;
+    color: var(--mine-shaft);
+    line-height: 1.65;
+  }
+  .hosting-note strong { color: var(--pumpkin); }
+  .hosting-note h4 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--ming); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 2rem 1.25rem; }
+    .main { padding: 1.5rem 1rem; }
+    .events-grid { grid-template-columns: 1fr; }
+    .filter-search { width: 100%; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-mark">E</div>
+    <div class="brand-text">
+      Euromonitor International
+      <span>Enterprise Applications Team</span>
+    </div>
+  </div>
+  <div class="header-badge">FY 2026 – 2027</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">📅 Annual Events Calendar</div>
+    <h1>Global Events &amp; Conferences<br>by Office / Region</h1>
+    <p>A live view of Euromonitor's worldwide event presence across all offices — including external industry events, hosted dinners, webinars, and first look sessions.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Office Groups</div></div>
+      <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Events Total</div></div>
+      <div class="stat"><div class="stat-num">26/27</div><div class="stat-label">Financial Year</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('main-calendar')"><span class="tab-dot"></span>Global Overview</button>
+    <button class="tab-btn" onclick="switchTab('chicago')"><span class="tab-dot"></span>Chicago</button>
+    <button class="tab-btn" onclick="switchTab('london')"><span class="tab-dot"></span>London</button>
+    <button class="tab-btn" onclick="switchTab('latam')"><span class="tab-dot"></span>LATAM</button>
+    <button class="tab-btn" onclick="switchTab('emeai')"><span class="tab-dot"></span>EMEAI</button>
+    <button class="tab-btn" onclick="switchTab('apac-gca')"><span class="tab-dot"></span>APAC GCA</button>
+    <button class="tab-btn" onclick="switchTab('apac-sst')"><span class="tab-dot"></span>APAC SST</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--pumpkin)"></span>Hosted Events</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--ming)"></span>External Events</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#7B8FA0"></span>Webinars</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#2E8B57"></span>First Look Series</span>
+  </div>
+
+  <!-- HOSTING NOTE (show on all panels) -->
+  <div class="hosting-note" id="hosting-info" style="display:none">
+    <h4>📌 SharePoint Hosting Recommendation</h4>
+    <strong>Best approach for org-wide access:</strong> Upload this HTML file to a <em>SharePoint Document Library</em> (e.g., <code>Intranet &gt; Events</code>), then embed it on any SharePoint page using the <strong>Embed web part</strong>. Set the page permissions to <em>"Everyone except external users"</em> for full org-wide reach — no Vercel or external hosting required. The file works as a fully self-contained single-page app; no backend or build step needed.
+  </div>
+
+  <!-- ===================== GLOBAL OVERVIEW ===================== -->
+  <div class="office-panel active" id="panel-main-calendar">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','main-calendar')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','main-calendar')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','main-calendar')">External</button>
+      <button class="filter-btn" onclick="filterCards(this,'webinar','main-calendar')">Webinars</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'main-calendar')">
+    </div>
+
+    <!-- Q4 Jan–Mar 2026 -->
+    <div class="quarter-group" data-quarter="Q4 Jan-Mar 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q4</span>
+        <span class="quarter-title">January – March 2026</span>
+        <span class="quarter-count">9 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">AI Wellness Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">6 Jan 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Source Fashion London</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago, Chile</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Riyadh Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Riyadh</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span><a class="event-link" href="https://shorturl.at/1zADs" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">NCA's US Coffee Outlook 2026 Webinar</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 Jan 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Seoul Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">29 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Seoul</span></div><div class="event-footer"><span class="poc-chip">POC: Bene</span><a class="event-link" href="https://shorturl.at/xccw4" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Global Pets Forum</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">21 Jan 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span><a class="event-link" href="https://shorturl.at/4UKii" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Luxe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 Jan 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Spielwarenmesse Nuremberg</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">30 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Nuremberg</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      </div>
+    </div>
+
+    <!-- Q4 Feb 2026 -->
+    <div class="quarter-group" data-quarter="Q4 Feb 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q4</span>
+        <span class="quarter-title">February 2026</span>
+        <span class="quarter-count">5 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">ISM Cologne Networking Dinner</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Cologne</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span><a class="event-link" href="https://redirme.com/3rwzcb" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ISM Cologne</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Cologne</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span><a class="event-link" href="https://redirme.com/jdjv4c" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">2026 Consumer Trends and Industry Insights</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 Feb 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: All</span><a class="event-link" href="https://redirme.com/amxr6h" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Finovate Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">10 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">How AI is Rewiring the Traditional Shopper Funnel</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">24 Feb 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+      </div>
+    </div>
+
+    <!-- Q4 Mar 2026 -->
+    <div class="quarter-group" data-quarter="Q4 Mar 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q4</span>
+        <span class="quarter-title">March 2026</span>
+        <span class="quarter-count">12 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ITB Berlin</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Berlin</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Beyond Search: How AI is Reshaping Commerce (London Hosted)</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span><a class="event-link" href="https://shorturl.at/Vx0DN" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Iftar Dinner Dubai (Postponed)</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">10 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span><a class="event-link" href="https://shorturl.at/l3rSF" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-first-look" data-type="first-look"><div class="event-top"><span class="event-name">Euromonitor Live: First Look at Retail</span><span class="event-badge badge-first-look">First Look</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">11 Mar 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span><a class="event-link" href="https://redirme.com/gtqmxc" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">National Coffee Association (Tampa)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Tampa, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span><a class="event-link" href="https://redirme.com/3kj2fn" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Prowein Düsseldorf</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">15 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Düsseldorf</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">LuxuryLab Global Brasil (São Paulo)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event: Loyalty</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Chicago Partnership Appreciation Dinner</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">18 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Chicago, IL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney / Kajal</span><a class="event-link" href="https://shorturl.at/Qt4QW" target="_blank">SF Link →</a></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event: Sustainability</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Tissue Summit Brasil (São Paulo)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">23 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Spring (Las Vegas)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">25 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+      </div>
+    </div>
+
+    <!-- Q1 Apr-Jun 2026 -->
+    <div class="quarter-group" data-quarter="Q1 Apr-Jun 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q1</span>
+        <span class="quarter-title">April – June 2026</span>
+        <span class="quarter-count">20 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">11th Craft Beer China Exhibition (CBCE 2026)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Shanghai</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Anuga Select Brazil (São Paulo)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Hosted Event in Lima, Peru</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">9 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Lima, Peru</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">in-cosmetics Global</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Paris</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">VTEXDay (São Paulo)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">EVO NXT Prague</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Prague</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Wabel London Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">20 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">FHA Singapore</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">21 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Tissue World Miami</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Miami, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Retail Congress</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">27 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Berlin</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-first-look" data-type="first-look"><div class="event-top"><span class="event-name">Euromonitor Live: First Look at Beauty &amp; Personal Care</span><span class="event-badge badge-first-look">First Look</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">30 Apr 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Vitafoods Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Spain</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Vitafoods Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">6 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Barcelona</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">PLMA World of Private Label (Amsterdam)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Amsterdam</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Arabian Travel Market</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Beautyworld Saudi Arabia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Riyadh</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">São Paulo Hosted Event: Wellness</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Money 20/20 Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Amsterdam</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Europe (Barcelona)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">9 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Barcelona</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Perfumery Congress</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">23 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Monterey, CA</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+      </div>
+    </div>
+
+    <!-- Q2 Jul-Sep 2026 -->
+    <div class="quarter-group" data-quarter="Q2 Jul-Sep 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q2</span>
+        <span class="quarter-title">July – September 2026</span>
+        <span class="quarter-count">8 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">in-cosmetics Korea</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Seoul</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Source Fashion</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Growth Asia Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">eTail Boston 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Boston, MA</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">15th LuxuryLab Global (Mexico)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Mexico City</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">eCommerce Expo</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">24 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cleaning Products US</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 Sep 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Sydney</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ESMOR Congress</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Valencia, Spain</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+      </div>
+    </div>
+
+    <!-- Q3 Oct-Dec 2026 -->
+    <div class="quarter-group" data-quarter="Q3 Oct-Dec 2026">
+      <div class="quarter-header">
+        <span class="quarter-pill">Q3</span>
+        <span class="quarter-title">October – December 2026</span>
+        <span class="quarter-count">4 events</span>
+      </div>
+      <div class="events-grid">
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Beautyworld Middle East</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">WTM London</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Global Innovation Forum</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">18 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine</span></div></div>
+        <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Dubai Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CHICAGO ===================== -->
+  <div class="office-panel" id="panel-chicago">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','chicago')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','chicago')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','chicago')">External</button>
+      <button class="filter-btn" onclick="filterCards(this,'webinar','chicago')">Webinars</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'chicago')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2026</span><span class="quarter-count">6 events</span></div><div class="events-grid">
+      <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">NCA U.S. Coffee Outlook 2026 (Webinar)</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Remote</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">PLMA Lunch &amp; Learn: Top GCT 2026 (Partner Webinar)</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">29 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Remote</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">CAGNY</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16–20 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Tampa, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">NCA Convention 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12–14 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Tampa, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Hosted Event – Insights' Partner Dinner</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">18 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Chicago, IL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Spring</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">24–26 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">7 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Tissue World Miami</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22–24 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Miami, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">FinovateSpring</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>San Diego, CA</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">PLMA Amsterdam</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19–20 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Amsterdam</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">IDDBA</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–9 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Orlando, FL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">MakeUp in Paris</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17–18 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Paris, FR</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Perfumery Congress</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">23–25 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Monterey, CA</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World of Wipes</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">29 Jun–2 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Nashville, TN</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q2</span><span class="quarter-title">July – September 2026</span><span class="quarter-count">7 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cosmoprof North America (Vegas)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">13–15 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">eTail Boston 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Boston, MA</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">SUPERZOO</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12–14 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">MoneyLIVE North America</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14–15 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Chicago, IL</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">MakeUp in New York</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16–17 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>New York, NY</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Groceryshop</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22–24 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cleaning Products US</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28–30 Sep 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">5 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Fall</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">29 Sep–1 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Nashville, TN</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">NACS Show</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–9 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">SupplySide Global</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26–30 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Las Vegas, NV</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Hygienix</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16–19 Nov 2026</span></span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Pet Food Association of Canada</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">TBD</span></span><span class="meta-item"><span class="meta-icon">📍</span>Canada</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- ===================== LONDON ===================== -->
+  <div class="office-panel" id="panel-london">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','london')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','london')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','london')">External</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'london')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2026</span><span class="quarter-count">4 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Source Fashion</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">11–14 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Finovate Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">10–11 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">100% Optical</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 Feb–2 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">London Hosted Event: AI Reshaping Commerce</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine &amp; Alaa</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">7 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">in-cosmetics Global</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14–16 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Paris, France</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span><a class="event-link" href="https://www.in-cosmetics.com/global/en-gb.html" target="_blank">Link →</a></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Wabel London Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">20–22 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London, UK</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Retail Congress</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">27–29 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Berlin, Germany</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">PLMA Amsterdam</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19–20 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Amsterdam</span></div><div class="event-footer"><span class="poc-chip">POC: Sydney Shields</span><a class="event-link" href="https://www.plmainternational.com/events/world-private-label-international-trade-show" target="_blank">Link →</a></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Richmond Market Insight Forum UK</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Money 20/20 Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2–4 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Amsterdam</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ShopTalk Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">9–11 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Barcelona</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q2</span><span class="quarter-title">July – September 2026</span><span class="quarter-count">4 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Source Fashion (Summer)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–9 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Source Fashion Breakfast Roundtable</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ESOMAR Congress 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1–4 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Valencia, Spain</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">eCommerce Expo</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">24–25 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">2 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">WTM London</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3–5 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Global Innovation Forum</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">18–19 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>London</span></div><div class="event-footer"><span class="poc-chip">POC: Elaine Yeung</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- ===================== LATAM ===================== -->
+  <div class="office-panel" id="panel-latam">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','latam')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','latam')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','latam')">External</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'latam')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2026</span><span class="quarter-count">5 events</span></div><div class="events-grid">
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event: Discounters</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago, Chile</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Luxury Lab Global, Brazil</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo, Brazil</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span><a class="event-link" href="https://luxurylabglobal.com/llg-sao-paulo/" target="_blank">Link →</a></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event: Loyalty</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago, Chile</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Santiago Hosted Event: Sustainability</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago, Chile</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Tissue Summit Brasil</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">23–24 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span><a class="event-link" href="https://tissuesummit.com.br/" target="_blank">Link →</a></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">9 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Anuga Select Brazil</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–9 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span><a class="event-link" href="https://anuga-brazil.com.br/" target="_blank">Link →</a></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Hosted Event Lima, Peru</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">9 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Lima, Peru</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Ecommerce Day Chile</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">9 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span><a class="event-link" href="https://ecommerceday.cl/2026/" target="_blank">Link →</a></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">VTEX Day (Digital Commerce)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16–17 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span><a class="event-link" href="https://vtexday.vtex.com/" target="_blank">Link →</a></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">42nd Expo ANTAD &amp; Alimentaria 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">19–21 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Guadalajara, Mexico</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">São Paulo Hosted Event: Wellness</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Fispal Tecnologia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16–19 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cleaning Products Latin America</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17–18 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Buenos Aires</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Personal Care Summit Latino America</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8–9 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q2</span><span class="quarter-title">July – September 2026</span><span class="quarter-count">7 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Food Ingredients South America (FISA)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">4–6 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Petsa 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">12–14 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Abastur 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26–28 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Mexico City</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Loyalty Marketing (LOMA)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Mexico City</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Vape Chile</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Santiago</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Tissue Summit Latinoamerica (Panama)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2–3 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Panama</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">15th Luxury Lab Global</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Mexico City</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">3 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Sustainable Foods Summit – Latin America</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">2 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>São Paulo</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ITB Americas 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">10–12 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Guadalajara</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">International Coffee Week – Sintercafé</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">11–14 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Costa Rica</span></div><div class="event-footer"><span class="poc-chip">POC: Cleide</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- ===================== EMEAI ===================== -->
+  <div class="office-panel" id="panel-emeai">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','emeai')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','emeai')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','emeai')">External</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'emeai')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2026</span><span class="quarter-count">3 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Shoptalk Luxe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">27 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Abu Dhabi</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Paper &amp; Tissue Show 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">31 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Abu Dhabi</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World Travel Market Africa</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">13 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>South Africa</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">10 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">EVO NXT</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Prague</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Vitafoods Europe – Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Barcelona</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Vitafoods Europe</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Barcelona</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Interzoo – Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">13 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Germany</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Interzoo</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Germany</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Beautyworld Saudi Arabia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Riyadh</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cosmetic Business Munich</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">10 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Munich</span></div><div class="event-footer"><span class="poc-chip">POC: Seren</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Johannesburg Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1 Jun 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>South Africa</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Bengaluru Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">TBC</span></span><span class="meta-item"><span class="meta-icon">📍</span>India</span></div><div class="event-footer"><span class="poc-chip">POC: Seren &amp; Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Arabian Travel Market</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q2</span><span class="quarter-title">July – September 2026</span><span class="quarter-count">3 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">ISM Middle East</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">15 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Money 20/20 Middle East</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">14 Sep 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Riyadh</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">MEADFA Conference</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">TBD</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai / Abu Dhabi</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">2 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Beautyworld Middle East</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Dubai Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Dubai</span></div><div class="event-footer"><span class="poc-chip">POC: Alaa</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- ===================== APAC GCA ===================== -->
+  <div class="office-panel" id="panel-apac-gca">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','apac-gca')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','apac-gca')">External</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'apac-gca')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">1 event</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">11th Craft Beer China Exhibition &amp; Conference (CBCE 2026)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Shanghai</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q2</span><span class="quarter-title">July – September 2026</span><span class="quarter-count">1 event</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Pet Fair Asia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">5 Aug 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Shanghai</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">1 event</span></div><div class="events-grid">
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Shanghai Office Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Shanghai</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2027</span><span class="quarter-count">2 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Appliance &amp; Electronics World Expo (AWE) 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">4 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Shanghai</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Sydney Office Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">TBC</span></span><span class="meta-item"><span class="meta-icon">📍</span>Sydney</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- ===================== APAC SST ===================== -->
+  <div class="office-panel" id="panel-apac-sst">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterCards(this,'all','apac-sst')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'hosted','apac-sst')">Hosted</button>
+      <button class="filter-btn" onclick="filterCards(this,'external','apac-sst')">External</button>
+      <input class="filter-search" placeholder="🔍  Search events…" oninput="searchCards(this,'apac-sst')">
+    </div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q4</span><span class="quarter-title">January – March 2026</span><span class="quarter-count">5 events</span></div><div class="events-grid">
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Seoul GCT Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">29 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Seoul</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">AI Wellness Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">6–7 Jan 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Dejima Webinar</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">22 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Japan</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Tokyo Partnership Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">26 Feb 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Tokyo</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">2026 APAC CFS Webinar</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">17 Mar 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q1</span><span class="quarter-title">April – June 2026</span><span class="quarter-count">9 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">FHA Singapore (Nat)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">21–24 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">FHA Singapore (Emil)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">21–24 Apr 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">PATA Global Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>South Korea</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-webinar" data-type="webinar"><div class="event-top"><span class="event-name">Next Asian Wave Webinar</span><span class="event-badge badge-webinar">Webinar</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">World of Coffee</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–9 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Thailand</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Cosmobeauty Seoul</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">27–29 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Seoul</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Thaifex Anuga</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28 May 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Thailand</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Growth Asia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">8–10 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Incos Korea</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3–5 Jul 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Seoul</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+    <div class="quarter-group"><div class="quarter-header"><span class="quarter-pill">Q3</span><span class="quarter-title">October – December 2026</span><span class="quarter-count">7 events</span></div><div class="events-grid">
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">APRCE 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">7–10 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Japan</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">CEATEC 2026</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">13 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Japan</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">HI Japan (食品開発展)</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">16 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Japan</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Pet Fair SEA</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">28–30 Oct 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Thailand</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">Incos Asia</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">3 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Thailand</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-external" data-type="external"><div class="event-top"><span class="event-name">APAC Agri-food Innovation Summit</span><span class="event-badge badge-external">External</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">1 Nov 2026</span></span><span class="meta-item"><span class="meta-icon">📍</span>Singapore</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+      <div class="event-card type-hosted" data-type="hosted"><div class="event-top"><span class="event-name">Tokyo Office Hosted Event</span><span class="event-badge badge-hosted">Hosted</span></div><div class="event-meta"><span class="meta-item"><span class="meta-icon">📅</span><span class="meta-date">Oct 2026 (TBC)</span></span><span class="meta-item"><span class="meta-icon">📍</span>Tokyo</span></div><div class="event-footer"><span class="poc-chip">POC: Reka</span></div></div>
+    </div></div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <strong>Euromonitor International</strong> · Enterprise Application Team · Events Calendar FY 2026–2027 · Internal Use Only
+</footer>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.office-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function filterCards(btn, type, panel) {
+    const panelEl = document.getElementById('panel-' + panel);
+    panelEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    panelEl.querySelectorAll('.event-card').forEach(card => {
+      card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+    });
+  }
+
+  function searchCards(input, panel) {
+    const q = input.value.toLowerCase();
+    document.getElementById('panel-' + panel).querySelectorAll('.event-card').forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
